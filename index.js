@@ -239,7 +239,7 @@ Keycloak.prototype.getGrant = function (request, response) {
   var rawData;
 
   for (var i = 0; i < this.stores.length; ++i) {
-    rawData = this.stores[i].get(request);
+    rawData = this.stores[i].get(request, this.config);
     if (rawData) {
       // store = this.stores[i];
       break;

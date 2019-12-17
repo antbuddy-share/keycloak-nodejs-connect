@@ -38,6 +38,7 @@ function GrantManager (config) {
   this.publicKey = config.publicKey;
   this.public = config.public;
   this.bearerOnly = config.bearerOnly;
+  this.config = config;
   this.notBefore = 0;
   this.rotation = new Rotation(config);
 }
@@ -291,7 +292,8 @@ GrantManager.prototype.validateGrant = function validateGrant (grant) {
   return new Promise((resolve, reject) => {
     var promises = [];
     promises.push(updateGrantToken(grant, 'access_token'));
-    if (!self.bearerOnly) {
+    // No check id and refresh if Bearer available
+    if (self.config.scope.NotBearerInHeader && !self.bearerOnly) {
       promises.push(updateGrantToken(grant, 'refresh_token'));
       promises.push(updateGrantToken(grant, 'id_token'));
     }
