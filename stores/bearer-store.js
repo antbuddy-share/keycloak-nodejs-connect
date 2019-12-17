@@ -19,10 +19,10 @@ let BearerStore = {};
 
 BearerStore.get = (request, config) => {
   let header = request.headers.authorization;
-  config.scope.NotBearerInHeader = true;
+  config.NotBearerInHeader = true;
   if (header) {
     if (header.indexOf('bearer ') === 0 || header.indexOf('Bearer ') === 0) {
-      config.scope.NotBearerInHeader = false;
+      config.NotBearerInHeader = false;
       let accessToken = header.substring(7);
       return {
         access_token: accessToken

@@ -293,7 +293,7 @@ GrantManager.prototype.validateGrant = function validateGrant (grant) {
     var promises = [];
     promises.push(updateGrantToken(grant, 'access_token'));
     // No check id and refresh if Bearer available
-    if (self.config.scope.NotBearerInHeader && !self.bearerOnly) {
+    if (self.config.NotBearerInHeader && !self.bearerOnly) {
       promises.push(updateGrantToken(grant, 'refresh_token'));
       promises.push(updateGrantToken(grant, 'id_token'));
     }
